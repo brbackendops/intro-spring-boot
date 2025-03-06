@@ -1,0 +1,22 @@
+/mvnw text eol=lf
+*.cmd text eol=crlf
+
+GetMapping
+PostMapping
+PutMapping
+DeleteMapping
+
+@RestController
+@PathVariable("id") - path
+@RequestParam - query
+@requestBody - data
+@RequestMapping - base url
+
+
+@PrePersist	 Before  the entity is inserted (saved) in the database.
+@PostPersist After  the entity is inserted (saved).
+@PreUpdate	 Before the entity is updated.
+@PostUpdate	 After  the entity is updated.
+@PreRemove	 Before the entity is deleted.
+@PostRemove	 After  the entity is deleted.
+@PostLoad	 After  the entity is loaded from the database.
