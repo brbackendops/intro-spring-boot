@@ -2,6 +2,7 @@ package net.javaguides.springboot_api.service;
 
 import net.javaguides.springboot_api.dto.UserDto;
 import net.javaguides.springboot_api.entity.User;
+import net.javaguides.springboot_api.exception.ResourceNotFoundException;
 import net.javaguides.springboot_api.repository.UserRepository;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -26,7 +27,8 @@ public class UserService {
     }
 
     public User findOneuser(long id) {
-        return userRepo.findById(id).orElse(null);
+        Optional<User> user =  userRepo.findById(id);
+        return user.orElse(null);
     }
 
     public User createUser(UserDto userDto){

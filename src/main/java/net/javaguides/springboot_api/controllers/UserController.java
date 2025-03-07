@@ -2,13 +2,18 @@ package net.javaguides.springboot_api.controllers;
 
 import net.javaguides.springboot_api.dto.UserDto;
 import net.javaguides.springboot_api.entity.User;
+import net.javaguides.springboot_api.exception.ErrorDetails;
+import net.javaguides.springboot_api.exception.ResourceNotFoundException;
 import net.javaguides.springboot_api.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.context.properties.source.InvalidConfigurationPropertyValueException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.HttpStatusCode;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.context.request.WebRequest;
 
+import java.time.LocalDate;
 import java.util.*;
 
 @RestController
@@ -25,19 +30,16 @@ public class UserController {
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<Map<String, Object>> getUser(@PathVariable("id") long id) {
+    public ResponseEntity<User> getUser(@PathVariable("id") long id) throws ResourceNotFoundException {
          User user = userServ.findOneuser(id);
          if ( user == null ) {
-             return ResponseEntity.status(HttpStatus.NOT_FOUND)
-                     .body(Map.of(
-                             "status","error",
-                             "message", "user not found"
-                     ));
+            throw new ResourceNotFoundException("user with this id is not found");
          }
-        return  ResponseEntity.status(HttpStatus.OK)
-                .body(Map.of(
-                        "data", user
-                ));
+        return new ResponseEntity<>(user,HttpStatus.OK);
+    // ResponseEntity.status(HttpStatus.OK)
+    //                .body(Map.of(
+    //                        "data", user
+    //                ));
     }
 
     @PostMapping("/")
@@ -61,4 +63,5 @@ public class UserController {
             return new ResponseEntity<>(err_msg, HttpStatus.BAD_REQUEST);
         }
     }
+
 }

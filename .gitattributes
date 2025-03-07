@@ -20,3 +20,12 @@ DeleteMapping
 @PreRemove	 Before the entity is deleted.
 @PostRemove	 After  the entity is deleted.
 @PostLoad	 After  the entity is loaded from the database.
+
+Bean Validation:
+    @NotNull
+    @Size
+    @Min
+    @Max
+    @Email
+    @NotEmpty
+    @NotBlank
