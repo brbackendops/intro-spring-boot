@@ -1,5 +1,7 @@
 package net.javaguides.springboot_api.controllers;
 
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import net.javaguides.springboot_api.dto.UserDto;
 import net.javaguides.springboot_api.entity.User;
 import net.javaguides.springboot_api.exception.ErrorDetails;
@@ -23,7 +25,14 @@ public class UserController {
     @Autowired
     private UserService userServ;
 
-
+    @Operation(
+            summary = "Get all users",
+            description = "Returning all joined users from database"
+    )
+    @ApiResponse(
+            responseCode = "200",
+            description = "HTTP Status 200 OK"
+    )
     @GetMapping("/")
     public List<User> getAllUsers(){
         return userServ.findAllUsers();
